@@ -1,0 +1,23 @@
+{
+  "name": "excelshop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Peter-TMK/ExcelShop.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Peter-TMK/ExcelShop/issues"
+  },
+  "homepage": "https://github.com/Peter-TMK/ExcelShop#readme",
+  "dependencies": {
+    "prettier": "^2.8.3"
+  }
+}
