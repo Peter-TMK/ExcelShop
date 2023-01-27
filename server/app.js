@@ -1,8 +1,10 @@
 const express = require('express');
 const app = express();
+const morgan = require('morgan')
 
 /* A middleware that parses the body of the request and makes it available in the req.body object. */
 app.use(express.json());
+app.use(morgan('tiny'));
 
 // require('dotenv').config()
 require('dotenv/config')
