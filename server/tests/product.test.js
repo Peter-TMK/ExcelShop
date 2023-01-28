@@ -15,8 +15,6 @@ afterEach(async () => {
 });
 
 
-  
-
 describe("GET /api/v1/products", () => {
 it("should return all products", async () => {
     const res = await request(app).get("/api/v1/products");
