@@ -4,6 +4,7 @@ const app = require("../app");
 
 require("dotenv").config();
 
+
 /* Connecting to the database before each test. */
 beforeEach(async () => {
     await mongoose.connect(process.env.MONGODB_URI);
@@ -40,7 +41,7 @@ it("should return all categories", async () => {
         "icon": "rabbit",
         "color": "grey"
       });
-      
+
       expect(res.statusCode).toBe(201);
       expect(res.body.name).toBe("Gadgets");
       expect(res.body.icon).toBe("rabbit");
