@@ -17,8 +17,17 @@ productRouter.get('/', async (req, res) => {
 productRouter.post('/', (req, res) => {
     const product = new Product({
         name: req.body.name,
+        description: req.body.description,
+        longDescription: req.body.longDescription,
         image: req.body.image,
+        images: req.body.images,
+        brand: req.body.brand,
+        price: req.body.price,
+        category: req.body.category,
         countInStock: req.body.countInStock,
+        rating: req.body.rating,
+        numReviews: req.body.numReviews,
+        isFeatured: req.body.isFeatured,
     })
 
     product

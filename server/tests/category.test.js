@@ -15,9 +15,9 @@ afterEach(async () => {
 });
 
 
-describe("GET /api/v1/products", () => {
-it("should return all products", async () => {
-    const res = await request(app).get("/api/v1/products");
+describe("GET /api/v1/categories", () => {
+it("should return all categories", async () => {
+    const res = await request(app).get("/api/v1/categories");
     expect(res.statusCode).toBe(200);
     expect(res.body.length).toBeGreaterThan(0);
 });
@@ -33,17 +33,18 @@ it("should return all products", async () => {
 // });
 // });
 
-  describe("POST /api/v1/products", () => {
-    it("should create a product", async () => {
-      const res = await request(app).post("/api/v1/products").send({
-        "name": "Excel2",
-        "description": "Dev Books",
-        "countInStock": 5
+  describe("POST /api/v1/categories", () => {
+    it("should create a categories", async () => {
+      const res = await request(app).post("/api/v1/categories").send({
+        "name": "Gadgets",
+        "icon": "rabbit",
+        "color": "grey"
       });
+      
       expect(res.statusCode).toBe(201);
-      expect(res.body.name).toBe("Excel2");
-      expect(res.body.description).toBe("Dev Books");
-      expect(res.body.countInStock).toBe(5);
+      expect(res.body.name).toBe("Gadgets");
+      expect(res.body.icon).toBe("rabbit");
+      expect(res.body.color).toBe('grey');
     });
   });
 
