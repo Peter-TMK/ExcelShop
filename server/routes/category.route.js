@@ -25,7 +25,6 @@ categoryRouter.post('/', async (req, res) => {
     if(!category){
         return res.status(404).send('Category not created!')
     }
-
     res.status(201).send(category);
 })
 
