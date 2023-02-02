@@ -1,10 +1,8 @@
-const express = require('express');
-const productRouter = express.Router();
-const Product = require('../models/product.model');
-const Category = require('../models/category.model');
-const mongoose = require('mongoose');
-
-
+const express = require('express')
+const productRouter = express.Router()
+const Product = require('../models/product.model')
+const Category = require('../models/category.model')
+const mongoose = require('mongoose')
 
 productRouter.get('/', async (req, res) => {
     const productItem = await Product.find().populate('category')
@@ -33,14 +31,12 @@ productRouter.get('/:id', async (req, res) => {
 })
 
 productRouter.post('/', async (req, res) => {
-
     // referencing the category to product
     // To confirm if category from user(front-end) is valid,
     // We create a new category request
 
     const category = await Category.findById(req.body.category)
-    if(!category)
-    return res.status(404).send('Category Not Found')
+    if (!category) return res.status(404).send('Category Not Found')
 
     const product = new Product({
         name: req.body.name,
@@ -57,27 +53,25 @@ productRouter.post('/', async (req, res) => {
         isFeatured: req.body.isFeatured,
     })
 
-    await product.save();
+    await product.save()
 
-    if(!product)
-    return res.status(404).send('Invalid Product Input')
+    if (!product) return res.status(404).send('Invalid Product Input')
 
-    res.send(product);
+    res.send(product)
 })
 
 productRouter.put('/:id', async (req, res) => {
     // validating parameter id with mongoose
 
-    if(!mongoose.isValidObjectId(req.params.id)){
+    if (!mongoose.isValidObjectId(req.params.id)) {
         res.status(404).send('Product ID Not Found!')
     }
     // referencing the category to product
     // To confirm if category from user(front-end) is valid,
     // We create a new category request
-    
+
     const category = await Category.findById(req.body.category)
-    if(!category)
-    return res.status(404).send('Category Not Found')
+    if (!category) return res.status(404).send('Category Not Found')
 
     const product = await Product.findByIdAndUpdate(
         req.params.id,
@@ -95,27 +89,37 @@ productRouter.put('/:id', async (req, res) => {
             numReviews: req.body.numReviews,
             isFeatured: req.body.isFeatured,
         },
-        {new: true}
+        { new: true }
     )
-    if(!product){
+    if (!product) {
         return res.status(400).send('Product cannot be updated!')
     }
-    res.status(201).send(product);
+    res.status(201).send(product)
 })
 
 productRouter.delete('/:id', async (req, res) => {
-    await Product.findByIdAndDelete(req.params.id).then(product => {
-        if(product){
-            return res.status(200).send('Product successfully deleted!')
-        }else{
-            return res.status(400).send('Product NOT found!')
-        }
-    }).catch(err => {
-        return res.status(404).json({
-            message: 'Invalid command!',
-            err
+    await Product.findByIdAndDelete(req.params.id)
+        .then((product) => {
+            if (product) {
+                return res.status(200).send('Product successfully deleted!')
+            } else {
+                return res.status(400).send('Product NOT found!')
+            }
         })
-    })
+        .catch((err) => {
+            return res.status(404).json({
+                message: 'Invalid command!',
+                err,
+            })
+        })
 })
 
-module.exports = productRouter;
+productRouter.get('/get/count', async (req, res) => {
+    const productCount = await Product.countDocuments((count) => count)
+    if (!productCount) {
+        res.status(500).json({ success: false })
+    }
+    res.send(productCount)
+})
+
+module.exports = productRouter
