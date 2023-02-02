@@ -16,11 +16,11 @@ afterEach(async () => {
 
 
 describe("GET /api/v1/products", () => {
-it("should return all products", async () => {
-    const res = await request(app).get("/api/v1/products");
-    expect(res.statusCode).toBe(200);
-    expect(res.body.length).toBeGreaterThan(0);
-});
+  it("should return all products", async () => {
+      const res = await request(app).get("/api/v1/products");
+      expect(res.statusCode).toBe(200);
+      expect(res.body.length).toBeGreaterThan(0);
+  });
 });
 
 // describe("GET /api/products/:id", () => {
@@ -33,19 +33,22 @@ it("should return all products", async () => {
 // });
 // });
 
-  describe("POST /api/v1/products", () => {
-    it("should create a product", async () => {
-      const res = await request(app).post("/api/v1/products").send({
-        "name": "Excel2",
-        "description": "Dev Books",
-        "countInStock": 5
-      });
-      expect(res.statusCode).toBe(201);
-      expect(res.body.name).toBe("Excel2");
-      expect(res.body.description).toBe("Dev Books");
-      expect(res.body.countInStock).toBe(5);
+describe("POST /api/v1/products", () => {
+  it("should create a product", async () => {
+    const res = await request(app).post("/api/v1/products").send({
+      "name": "Excel7",
+      "description": "Dev dev Books",
+      "countInStock":10,
+      "category": "63db5de31c6815719a48f191"
     });
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body.name).toBe("Excel7");
+    expect(res.body.description).toBe("Dev dev Books");
+    expect(res.body.countInStock).toBe(10);
+    expect(res.body.category).toBe("63db5de31c6815719a48f191");
   });
+});
 
 
 //   describe("PUT /api/products/:id", () => {

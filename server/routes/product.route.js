@@ -1,6 +1,8 @@
 const express = require('express');
 const productRouter = express.Router()
 const Product = require('../models/product.model')
+const Category = require('../models/category.model')
+
 
 
 productRouter.get('/', async (req, res) => {
@@ -14,7 +16,14 @@ productRouter.get('/', async (req, res) => {
     res.send(productItem)
 })
 
-productRouter.post('/', (req, res) => {
+productRouter.post('/', async (req, res) => {
+    // To confirm if category from user(front-end) is valid,
+    // We create a new category request
+
+    const category = await Category.findById(req.body.category)
+    if(!category)
+    return res.status(404).send('Category Not Found')
+    
     const product = new Product({
         name: req.body.name,
         description: req.body.description,
@@ -30,17 +39,12 @@ productRouter.post('/', (req, res) => {
         isFeatured: req.body.isFeatured,
     })
 
-    product
-        .save()
-        .then((createdProduct) => {
-            res.status(201).json(createdProduct)
-        })
-        .catch((err) => {
-            res.status(500).json({
-                error: err,
-                success: false,
-            })
-        })
+    await product.save();
+
+    if(!product)
+    return res.status(404).send('Invalid Product Input')
+
+    res.send(product);
 })
 
 module.exports = productRouter;
