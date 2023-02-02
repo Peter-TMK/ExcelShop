@@ -67,14 +67,14 @@ productRouter.post('/', async (req, res) => {
 
 productRouter.put('/:id', async (req, res) => {
     // validating parameter id with mongoose
-    
+
     if(!mongoose.isValidObjectId(req.params.id)){
         res.status(404).send('Product ID Not Found!')
     }
     // referencing the category to product
     // To confirm if category from user(front-end) is valid,
     // We create a new category request
-
+    
     const category = await Category.findById(req.body.category)
     if(!category)
     return res.status(404).send('Category Not Found')
