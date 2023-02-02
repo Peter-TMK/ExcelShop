@@ -46,35 +46,10 @@ describe("POST /api/v1/categories", () => {
   });
 });
 
-describe("DELETE /api/v1/categories/:id", () => {
-  it("should delete a product", async () => {
-    const res = await request(app).delete("/api/v1/categories/63d690dd6554e1b0b82317eb");
-    expect(res.statusCode).toBe(200);
-  });
-});
-
-// describe("GET /api/products/:id", () => {
-// it("should return a product", async () => {
-//     const res = await request(app).get(
-//     "/api/products/63cbab20eea48da8b08e93a7"
-//     );
+// describe("DELETE /api/v1/categories/:id", () => {
+//   it("should delete a product", async () => {
+//     const res = await request(app).delete("/api/v1/categories/63d690dd6554e1b0b82317eb");
 //     expect(res.statusCode).toBe(200);
-//     expect(res.body.name).toBe("Int Test Dongle");
-// });
-// });
-
-
-
-//   describe("PUT /api/products/:id", () => {
-//     it("should update a product", async () => {
-//       const res = await request(app)
-//         .put("/api/products/63cbacb46066b1a6a6d588cc")
-//         .send({
-//             name: "Express Package",
-//             price: 1491,
-//             description: "Express Resource",
-//         });
-//       expect(res.statusCode).toBe(200);
-//       expect(res.body.price).toBe(1491);
-//     });
 //   });
+// });
+

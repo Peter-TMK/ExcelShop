@@ -4,14 +4,14 @@ const Category = require('../models/category.model')
 
 
 categoryRouter.get('/', async (req, res) => {
-    const categoryItem = await Category.find()
+    const categoryList = await Category.find()
 
-    if (!categoryItem) {
+    if (!categoryList) {
         res.status(500).json({
             error: 'No category(ies) found!',
         })
     }
-    res.send(categoryItem)
+    res.send(categoryList)
 })
 
 categoryRouter.get('/:id', async (req, res) => {
