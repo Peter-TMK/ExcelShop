@@ -7,6 +7,8 @@ const Category = require('../models/category.model')
 
 productRouter.get('/', async (req, res) => {
     const productItem = await Product.find()
+    // use select to choose specific data to be returned
+    .select('name image -_id')
 
     if (!productItem) {
         res.status(500).json({
@@ -14,6 +16,16 @@ productRouter.get('/', async (req, res) => {
         })
     }
     res.send(productItem)
+})
+
+productRouter.get('/:id', async (req, res) => {
+    const product = await Product.findById(req.params.id)
+    if (!product) {
+        res.status(500).json({
+            error: 'No such product with such ID found!',
+        })
+    }
+    res.status(200).send(product)
 })
 
 productRouter.post('/', async (req, res) => {
