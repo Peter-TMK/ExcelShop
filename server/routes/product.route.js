@@ -1,11 +1,16 @@
 const express = require('express')
+const mongoose = require('mongoose')
 const productRouter = express.Router()
 const Product = require('../models/product.model')
 const Category = require('../models/category.model')
-const mongoose = require('mongoose')
+const app = require('../app')
 
-productRouter.get('/', async (req, res) => {
-    const productItem = await Product.find().populate('category')
+productRouter.get(`/`, async (req, res) => {
+    let filter;
+    if (req.query.categories) {
+        filter = { category: req.query.categories.split(',') }
+    }
+    const productItem = await Product.find(filter).populate('category')
     // populate('category', 'icon')
     // the second parameter in the populate method returns a specific data
     // use select to choose specific data to be returned
@@ -20,6 +25,43 @@ productRouter.get('/', async (req, res) => {
     res.send(productItem)
 })
 
+productRouter.get(`/featuredProduct/`, async (req, res) => {
+    const featuredProduct = await Product.find({ isFeatured: true })
+
+    if (!featuredProduct) {
+        res.status(500).json({
+            error: 'No product found!',
+        })
+    }
+    res.send(featuredProduct)
+})
+
+productRouter.get(`/featuredProduct/:count`, async (req, res) => {
+    const count = req.params.count ? req.params.count : 0
+    const featuredProduct = await Product.find({ isFeatured: true }).limit(
+        +count
+    )
+
+    if (!featuredProduct) {
+        res.status(500).json({
+            error: 'No product found!',
+        })
+    }
+    res.send(featuredProduct)
+})
+
+productRouter.get(`/productCount`, async (req, res) => {
+    const product = await Product.find().populate('category')
+    const productCount = await Product.countDocuments()
+    if (!productCount) {
+        res.status(500).json({ success: false })
+    }
+    res.send({
+        productCount: `Database has ${productCount} product(s)`,
+        product: product,
+    })
+})
+
 productRouter.get('/:id', async (req, res) => {
     const product = await Product.findById(req.params.id).populate('category')
     if (!product) {
@@ -30,7 +72,7 @@ productRouter.get('/:id', async (req, res) => {
     res.status(200).send(product)
 })
 
-productRouter.post('/', async (req, res) => {
+productRouter.post(`/`, async (req, res) => {
     // referencing the category to product
     // To confirm if category from user(front-end) is valid,
     // We create a new category request
@@ -112,14 +154,6 @@ productRouter.delete('/:id', async (req, res) => {
                 err,
             })
         })
-})
-
-productRouter.get('/get/count', async (req, res) => {
-    const productCount = await Product.countDocuments((count) => count)
-    if (!productCount) {
-        res.status(500).json({ success: false })
-    }
-    res.send(productCount)
 })
 
 module.exports = productRouter
