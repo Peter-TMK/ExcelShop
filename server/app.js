@@ -7,8 +7,8 @@ const api = process.env.API_URL
 const PORT = process.env.PORT
 const cors = require('cors');
 
-app.use(cors());
-app.options('*', cors())
+// app.use(cors());
+// app.options('*', cors())
 
 /* A middleware that parses the body of the request and makes it available in the req.body object. */
 app.use(express.json())

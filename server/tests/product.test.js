@@ -23,6 +23,14 @@ describe("GET /api/v1/products", () => {
   });
 });
 
+// describe("GET /api/v1/products?categories=id", () => {
+//   it("should return all products", async () => {
+//       const res = await request(app).get("/api/v1/products?categories");
+//       expect(res.statusCode).toBe(200);
+//       expect(res.body.length).toBeGreaterThan(0);
+//   });
+// });
+// /api/v1/products?categories=63dbd045417bc873454ae18b
 // describe("GET /api/products/:id", () => {
 // it("should return a product", async () => {
 //     const res = await request(app).get(
