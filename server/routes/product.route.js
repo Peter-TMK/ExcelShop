@@ -58,7 +58,8 @@ productRouter.get(`/productCount`, async (req, res) => {
     }
     res.send({
         productCount: `Database has ${productCount} product(s)`,
-        product: product,
+        // no need to display the below
+        // product: product,
     })
 })
 
