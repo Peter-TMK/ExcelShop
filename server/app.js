@@ -13,6 +13,11 @@ const cors = require('cors');
 /* A middleware that parses the body of the request and makes it available in the req.body object. */
 app.use(express.json())
 app.use(morgan('tiny'))
+app.use((err, req, res, next) => {
+    if(err){
+        res.status(500).send(err);
+    }
+})
 
 const productRouter = require('./routes/product.route')
 const categoryRouter = require('./routes/category.route')
@@ -22,7 +27,7 @@ const userRouter = require('./routes/user.route')
 //Routes
 app.use(`${api}/products`, productRouter)
 app.use(`${api}/categories`, categoryRouter)
-// app.use(`${api}/orders`, orderRouter)
-// app.use(`${api}/users`, userRouter)
+app.use(`${api}/orders`, orderRouter)
+app.use(`${api}/users`, userRouter)
 
 module.exports = app;
