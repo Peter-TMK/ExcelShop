@@ -6,6 +6,14 @@ const Category = require('../models/category.model')
 const app = require('../app')
 const multer = require('multer');
 
+// MIME type - Multipurpose Internet Mail Extension
+
+const FILE_TYPE_MAP = {
+    'image/png': 'png',
+    'image/jpeg': 'jpeg',
+    'image/jpg': 'jpg'
+}
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         const isValid = FILE_TYPE_MAP[file.mimetype];
@@ -106,7 +114,7 @@ productRouter.post(`/`, uploadOptions.single('image'), async (req, res) => {
     if(!file) return res.status(400).send('No image in the request')
     
 
-    const fileName = file.filename
+    const fileName = req.file.filename
     const basePath = `${req.protocol}://${req.get('host')}/public/uploads/`;
 
     const product = new Product({
@@ -114,8 +122,8 @@ productRouter.post(`/`, uploadOptions.single('image'), async (req, res) => {
         description: req.body.description,
         longDescription: req.body.longDescription,
         // image: req.body.image,
-        image: `${basePath}${fileName}`,
         // images: req.body.images,
+        image: `${basePath}${fileName}`,
         brand: req.body.brand,
         price: req.body.price,
         category: req.body.category,
