@@ -4,10 +4,10 @@ const Auth = require('./auth')
 // const userController = require('../controllers/user.controller')
 const bcrypt = require('bcryptjs');
 
+AuthRouter.post('/register', Auth.registerUser)
 
 AuthRouter.post('/login', Auth.loginUser)
 
-AuthRouter.post('/register', Auth.registerUser)
 
 
 module.exports = AuthRouter;

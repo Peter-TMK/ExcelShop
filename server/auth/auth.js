@@ -34,8 +34,11 @@ const loginUser = async (req, res) => {
         return res.status(400).send('The user not found');
     }
     if(user && bcrypt.compareSync(req.body.passwordHash, user.passwordHash)) {
+        
         res.status(200).send('user authenticated!') 
     } else {
+        console.log(req.body.passwordHash)
+        console.log(user.passwordHash)
        res.status(400).send('password is wrong!');
     }
     //    res.status(200).send(user);
