@@ -7,6 +7,11 @@ const Category = require('../models/category.model')
 const productController = require('../controllers/product.controller')
 const multer = require('multer');
 
+const passport = require('passport');
+// const app = require('../app');
+require("../config/verifyBearerToken")
+productRouter.use(passport.initialize());
+
 // MIME type - Multipurpose Internet Mail Extension
 const FILE_TYPE_MAP = {
     'image/png': 'png',
@@ -45,10 +50,10 @@ productRouter.get(`/productCount`, productController.getProductCount)
 
 productRouter.get('/:id', productController.getProductById)
 
-productRouter.post(`/uploadFile`, uploadOptions.single('image'), productController.postProduct)
+productRouter.post(`/uploadFile`, uploadOptions.single('image'), passport.authenticate('jwt', {session: false}), productController.postProduct)
 
-productRouter.put('/:id', productController.updateProduct)
+productRouter.put('/:id', passport.authenticate('jwt', {session: false}), productController.updateProduct)
 
-productRouter.delete('/:id', productController.deleteProduct)
+productRouter.delete('/:id', passport.authenticate('jwt', {session: false}), productController.deleteProduct)
 
 module.exports = productRouter
