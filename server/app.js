@@ -5,17 +5,18 @@ const mongoose = require('mongoose')
 require('dotenv/config')
 const api = process.env.API_URL
 const PORT = process.env.PORT
-const cors = require('cors');
+const cors = require('cors')
 
 // app.use(cors());
 // app.options('*', cors())
 
 /* A middleware that parses the body of the request and makes it available in the req.body object. */
 app.use(express.json())
+// app.use(express.urlencoded({ extended: true }))
 app.use(morgan('tiny'))
 app.use((err, req, res, next) => {
-    if(err){
-        res.status(500).send(err);
+    if (err) {
+        res.status(500).send(err)
     }
 })
 
@@ -32,5 +33,4 @@ app.use(`${api}/orders`, orderRouter)
 app.use(`${api}/users`, userRouter)
 app.use(`${api}/auth`, authRouter)
 
-
-module.exports = app;
+module.exports = app
