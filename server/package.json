@@ -1,40 +1,43 @@
 {
-  "name": "excelshop",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
-  "scripts": {
-    "test": "cross-env NODE_ENV=test jest --testTimeout=10000 --watchAll",
-    "start": "nodemon server"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Peter-TMK/ExcelShop.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Peter-TMK/ExcelShop/issues"
-  },
-  "homepage": "https://github.com/Peter-TMK/ExcelShop#readme",
-  "dependencies": {
-    "bcrypt": "^5.1.0",
-    "bcryptjs": "^2.4.3",
-    "cors": "^2.8.5",
-    "cross-env": "^7.0.3",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "jsonwebtoken": "^9.0.0",
-    "mongoose": "^6.9.0",
-    "morgan": "^1.10.0",
-    "multer": "^1.4.5-lts.1",
-    "passport": "^0.6.0",
-    "passport-jwt": "^4.0.1",
-    "prettier": "^2.8.3",
-    "validator": "^13.9.0"
-  },
-  "devDependencies": {
-    "jest": "^29.4.1",
-    "supertest": "^6.3.3"
-  }
+    "name": "excelshop",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "scripts": {
+        "test": "cross-env NODE_ENV=test jest --testTimeout=10000 --watchAll",
+        "start": "node server",
+        "dev": "nodemon server"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Peter-TMK/ExcelShop.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Peter-TMK/ExcelShop/issues"
+    },
+    "homepage": "https://github.com/Peter-TMK/ExcelShop#readme",
+    "dependencies": {
+        "bcrypt": "^5.1.0",
+        "bcryptjs": "^2.4.3",
+        "cors": "^2.8.5",
+        "cross-env": "^7.0.3",
+        "dotenv": "^16.0.3",
+        "express": "^4.18.2",
+        "jsonwebtoken": "^9.0.0",
+        "mongoose": "^6.9.0",
+        "morgan": "^1.10.0",
+        "morgan-json": "^1.1.0",
+        "multer": "^1.4.5-lts.1",
+        "passport": "^0.6.0",
+        "passport-jwt": "^4.0.1",
+        "prettier": "^2.8.3",
+        "validator": "^13.9.0",
+        "winston": "^3.8.2"
+    },
+    "devDependencies": {
+        "jest": "^29.4.1",
+        "supertest": "^6.3.3"
+    }
 }
